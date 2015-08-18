@@ -1,7 +1,5 @@
 package fibonacci
 
-import "fmt"
-
 func Fibonacci(n int) chan int {
 	c := make(chan int)
 	go func() {
