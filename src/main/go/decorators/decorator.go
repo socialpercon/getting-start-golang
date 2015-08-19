@@ -15,11 +15,13 @@ func authRequried(f http.HandlerFunc) http.HandlerFunc {
 	}
 }
 
+func doGet(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "Hi, %v", r.FormValue("user"))
+}
+
 func main() {
 	var hiHandler = authRequried(
-		func(w http.ResponseWriter, r *http.Request) {
-			fmt.Fprintf(w, "Hi, %v", r.FormValue("user"))
-		},
+		doGet,
 	)
 	http.HandleFunc("/hi", hiHandler)
 	http.ListenAndServe(":8080", nil)
